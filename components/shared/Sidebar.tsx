@@ -26,7 +26,7 @@ const Sidebar = () => {
         <nav className="sidebar-nav">
           <SignedIn>
             <ul className="sidebar-nav_elements">
-              {navLinks.map(({ label, route, icon }) => {
+              {navLinks.slice(0, 6).map(({ label, route, icon }) => {
                 const isActive = pathname === route;
                 return (
                   <li
@@ -50,7 +50,33 @@ const Sidebar = () => {
                   </li>
                 );
               })}
+            </ul>
 
+            <ul className="sidebar-nav_elements">
+              {navLinks.slice(6).map(({ label, route, icon }) => {
+                const isActive = pathname === route;
+                return (
+                  <li
+                    className={`sidebar-nav_element group ${
+                      isActive
+                        ? "bg-purple-gradient text-white"
+                        : "text-gray-700"
+                    }`}
+                    key={route}
+                  >
+                    <Link href={route} className="sidebar-link">
+                      <Image
+                        src={icon}
+                        alt={label}
+                        width={24}
+                        height={24}
+                        className={`${isActive && "brightness-200"}`}
+                      />
+                      {label}
+                    </Link>
+                  </li>
+                );
+              })}
               <li className="flex-center p-4 gap-2 cursor-pointer">
                 <UserButton afterSignOutUrl="/" showName />
               </li>
