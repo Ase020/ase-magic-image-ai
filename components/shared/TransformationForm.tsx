@@ -24,7 +24,7 @@ import { CustomField } from "./CustomField";
 import { AspectRatioKey, debounce, deepMergeObjects } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { updateCredits } from "@/lib/actions/user.action";
-import { MediaUploader } from ".";
+import { MediaUploader, TransformedImage } from ".";
 
 export const formSchema = z.object({
   title: z.string(),
@@ -140,7 +140,7 @@ const TransformationForm = ({
             className="w-full"
             render={({ field }) => (
               <Select
-                onValueChange={(value) =>
+                onValueChange={(value: any) =>
                   onSelectFieldHandler(value, field.onChange)
                 }
               >
@@ -223,6 +223,15 @@ const TransformationForm = ({
                 type={type}
               />
             )}
+          />
+
+          <TransformedImage
+            image={image}
+            type={type}
+            title={form.getValues().title}
+            isTransforming={isTransforming}
+            setIsTransforming={setIsTransforming}
+            transformationConfig={transformationConfig}
           />
         </div>
 

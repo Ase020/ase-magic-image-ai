@@ -3,5 +3,13 @@ import MobileNav from "./MobileNav";
 import Header from "./Header";
 import TransformationForm from "./TransformationForm";
 import MediaUploader from "./MediaUploader";
+import TransformedImage from "./TransformedImage";
 
-export { Sidebar, MobileNav, Header, TransformationForm, MediaUploader };
+export {
+  Sidebar,
+  MobileNav,
+  Header,
+  TransformationForm,
+  MediaUploader,
+  TransformedImage,
+};
