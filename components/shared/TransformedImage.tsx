@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 
-import { TransformedImageProps } from "@/types";
 import { CldImage } from "next-cloudinary";
 import { dataUrl, debounce, getImageSize } from "@/lib/utils";
 import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";

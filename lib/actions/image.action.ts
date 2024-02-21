@@ -1,4 +1,4 @@
-"user server";
+"use server";
 
 import { AddImageParams, UpdateImageParams } from "@/types";
 import { handleError } from "../utils";

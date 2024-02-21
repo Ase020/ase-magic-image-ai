@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState, useTransition } from "react";
-import { z } from "zod";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 import { Form } from "../ui/form";
 import { Input } from "../ui/input";
@@ -19,14 +20,14 @@ import {
   defaultValues,
   transformationTypes,
 } from "@/constants";
-import { TransformationFormProps, Transformations } from "@/types";
 import { CustomField } from "./CustomField";
 import { AspectRatioKey, debounce, deepMergeObjects } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { updateCredits } from "@/lib/actions/user.action";
 import { MediaUploader, TransformedImage } from ".";
 import { getCldImageUrl } from "next-cloudinary";
-import { addImage } from "@/lib/actions/image.action";
+import { addImage, updateImage } from "@/lib/actions/image.action";
+import { useRouter } from "next/navigation";
 
 export const formSchema = z.object({
   title: z.string(),
@@ -44,6 +45,7 @@ const TransformationForm = ({
   creditBalance,
   config = null,
 }: TransformationFormProps) => {
+  const transformationType = transformationTypes[type];
   const [image, setImage] = useState(data);
   const [newTransformation, setNewTransformation] =
     useState<Transformations | null>(null);
@@ -52,7 +54,7 @@ const TransformationForm = ({
   const [transformationConfig, setTransformationConfig] = useState(config);
   const [isPending, startTransition] = useTransition();
 
-  const transformationType = transformationTypes[type];
+  const router = useRouter();
 
   const initialValues =
     data && action === "Update"
@@ -83,7 +85,7 @@ const TransformationForm = ({
 
       const imageData = {
         title: values.title,
-        publicId: values.publicId,
+        publicId: image?.publicId,
         transformationType: type,
         width: image?.width,
         height: image?.height,
@@ -100,8 +102,30 @@ const TransformationForm = ({
           const newImage = await addImage({
             image: imageData,
             userId,
-            path: "/images",
+            path: "/",
           });
+
+          if (newImage) {
+            form.reset();
+            setImage(data);
+            router.push(`/transformations/${newImage._id}`);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      if (action === "Update") {
+        try {
+          const updatedImage = await updateImage({
+            image: { ...imageData, _id: data._id },
+            userId,
+            path: `/transformations/${data._id}`,
+          });
+
+          if (updatedImage) {
+            router.push(`/transformations/${updatedImage._id}`);
+          }
         } catch (error) {
           console.log(error);
         }
