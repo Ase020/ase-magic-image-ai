@@ -4,6 +4,7 @@ import Header from "./Header";
 import TransformationForm from "./TransformationForm";
 import MediaUploader from "./MediaUploader";
 import TransformedImage from "./TransformedImage";
+import InsufficientCreditsModal from "./InsufficientCreditsModal";
 
 export {
   Sidebar,
@@ -12,4 +13,5 @@ export {
   TransformationForm,
   MediaUploader,
   TransformedImage,
+  InsufficientCreditsModal,
 };

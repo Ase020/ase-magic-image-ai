@@ -1,6 +1,5 @@
 "use server";
 
-import { AddImageParams, UpdateImageParams } from "@/types";
 import { handleError } from "../utils";
 import { connectToDatabase } from "../database/mongoose";
 import { revalidatePath } from "next/cache";
