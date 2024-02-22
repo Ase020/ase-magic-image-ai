@@ -1,9 +1,16 @@
-import { navLinks } from "@/constants";
+import { Collection } from "@/components/shared";
 import { UserButton } from "@clerk/nextjs";
+import { navLinks } from "@/constants";
+import { getAllImages } from "@/lib/actions/image.action";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Home() {
+export default async function Home({ searchParams }: SearchParamProps) {
+  const page = Number(searchParams?.page) || 1;
+  const searchQuery = String(searchParams?.query as string);
+
+  const images = await getAllImages({ page, searchQuery });
+
   return (
     <>
       <section className="home">
@@ -25,6 +32,15 @@ export default function Home() {
             </Link>
           ))}
         </ul>
+      </section>
+
+      <section className="mt-12">
+        <Collection
+          images={images?.data}
+          page={page}
+          totalPages={images?.totalPages}
+          hasSearch={true}
+        />
       </section>
     </>
   );
