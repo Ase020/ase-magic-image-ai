@@ -38,7 +38,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
         <Collection
           images={images?.data}
           page={page}
-          totalPages={images?.totalPages}
+          totalPages={images?.totalPage}
           hasSearch={true}
         />
       </section>

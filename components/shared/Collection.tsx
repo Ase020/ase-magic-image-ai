@@ -32,8 +32,6 @@ const Collection = ({
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  console.log("Images: ", images);
-
   // PAGINATION HANDLER
   const onPageChange = (action: string) => {
     const pageValue = action === "next" ? Number(page) + 1 : Number(page) - 1;

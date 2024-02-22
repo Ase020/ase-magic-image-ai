@@ -7,6 +7,7 @@ import TransformedImage from "./TransformedImage";
 import InsufficientCreditsModal from "./InsufficientCreditsModal";
 import Collection from "./Collection";
 import Search from "./Search";
+import DeleteConfirmation from "./DeleteConfirmation";
 
 export {
   Sidebar,
@@ -18,4 +19,5 @@ export {
   InsufficientCreditsModal,
   Collection,
   Search,
+  DeleteConfirmation,
 };
