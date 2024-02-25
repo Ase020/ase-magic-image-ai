@@ -15,7 +15,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
     <>
       <section className="home">
         <h1 className="home-heading">
-          Unleash Your Creative Vision with Imaginify
+          Unleash Your Creative Vision with Imaginify test
         </h1>
 
         <ul className="flex-center w-full gap-20">
