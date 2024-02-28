@@ -2,7 +2,6 @@ import { Header, TransformationForm } from "@/components/shared";
 import { transformationTypes } from "@/constants";
 import { getUserById } from "@/lib/actions/user.action";
 import { auth } from "@clerk/nextjs";
-import { SearchParamProps, TransformationTypeKey } from "@/types";
 import { redirect } from "next/navigation";
 import React from "react";
 
